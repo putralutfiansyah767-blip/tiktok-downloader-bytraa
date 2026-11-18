@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIKTOK DOWNLOADER | Gojo Satoru Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void-bg: #03050a;
+            --card-bg: rgba(8, 12, 26, 0.92);
+            --six-eyes: #00f2fe;
+            --hollow-purple: #9333ea;
+            --purple-glow: rgba(147, 51, 234, 0.65);
+            --cyan-glow: rgba(0, 242, 254, 0.55);
+            --text-main: #f0f4ff;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--void-bg);
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(0, 242, 254, 0.16) 0%, transparent 45%),
+                radial-gradient(circle at 80% 80%, rgba(147, 51, 234, 0.22) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, #070b19 0%, #020308 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Partikel Energi Kutukan */
+        .cursed-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(65px);
+            z-index: 0;
+            animation: floatOrb 6s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+
+        .orb-blue {
+            width: 240px;
+            height: 240px;
+            background: rgba(0, 242, 254, 0.28);
+            top: 8%;
+            left: 5%;
+        }
+
+        .orb-purple {
+            width: 280px;
+            height: 280px;
+            background: rgba(147, 51, 234, 0.32);
+            bottom: 8%;
+            right: 5%;
+            animation-delay: -3s;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, -30px) scale(1.25); }
+        }
+
+        .container {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 242, 254, 0.35);
+            border-radius: 24px;
+            padding: 36px 24px 28px;
+            width: 100%;
+            max-width: 540px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(147, 51, 234, 0.28);
+            position: relative;
+            z-index: 2;
+            margin-top: 40px;
+        }
+
+        /* Lingkaran Animasi Gojo Melompat */
+        .gojo-animation-box {
+            width: 118px;
+            height: 118px;
+            margin: -95px auto 14px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--six-eyes);
+            box-shadow: 0 0 25px var(--six-eyes), 0 0 25px rgba(147, 51, 234, 0.8);
+            background: radial-gradient(circle at 50% 30%, #1e1b4b, #03050a);
+            position: relative;
+            z-index: 5;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .gojo-character-svg {
+            width: 96px;
+            height: 96px;
+            animation: gojoJump 0.65s infinite cubic-bezier(0.28, 0.84, 0.42, 1);
+            transform-origin: bottom center;
+        }
+
+        @keyframes gojoJump {
+            0%   { transform: scale(1, 1) translateY(4px); }
+            15%  { transform: scale(1.08, 0.9) translateY(6px); }
+            45%  { transform: scale(0.94, 1.08) translateY(-16px); }
+            75%  { transform: scale(1.02, 0.98) translateY(2px); }
+            100% { transform: scale(1, 1) translateY(4px); }
+        }
+
+        .aura-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px dashed rgba(0, 242, 254, 0.5);
+            animation: spinAura 6s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes spinAura {
+            100% { transform: rotate(360deg); }
+        }
+
+        .header-title {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .header-title h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            background: linear-gradient(90deg, #00f2fe, #e0c3fc, #ff1744);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .header-title p {
+            color: var(--six-eyes);
+            font-size: 13px;
+            font-weight: 700;
+            margin-top: 8px;
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+            letter-spacing: 0.5px;
+        }
+
+        /* Input & Tombol Paste */
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: rgba(4, 8, 20, 0.95);
+            border: 1px solid rgba(0, 242, 254, 0.4);
+            border-radius: 14px;
+            padding: 6px;
+            transition: all 0.3s ease;
+            margin-top: 5px;
+        }
+
+        .input-wrapper:focus-within {
+            border-color: var(--hollow-purple);
+            box-shadow: 0 0 22px var(--purple-glow);
+        }
+
+        input[type="text"] {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #fff;
+            padding: 12px 12px;
+            font-size: 14px;
+            outline: none;
+            width: 100%;
+        }
+
+        input[type="text"]::placeholder {
+            color: #64748b;
+        }
+
+        .btn-paste {
+            background: rgba(0, 242, 254, 0.16);
+            color: var(--six-eyes);
+            border: 1px solid rgba(0, 242, 254, 0.4);
+            padding: 9px 13px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
+
+        .btn-exec {
+            width: 100%;
+            margin-top: 14px;
+            padding: 15px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #0284c7 0%, #7c3aed 50%, #e11d48 100%);
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 15px;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.45);
+            text-transform: uppercase;
+        }
+
+        .status-box {
+            margin-top: 14px;
+            text-align: center;
+            font-size: 13px;
+            min-height: 20px;
+            font-weight: 600;
+        }
+
+        .status-loading { color: var(--six-eyes); }
+        .status-error { color: #ff5252; }
+        .status-success { color: #69f0ae; }
+
+        /* Kartu Hasil */
+        .result-card {
+            display: none;
+            margin-top: 20px;
+            background: rgba(6, 10, 22, 0.95);
+            border: 1px solid rgba(147, 51, 234, 0.45);
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        .media-preview {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .thumb-img {
+            width: 80px;
+            height: 106px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid var(--six-eyes);
+            flex-shrink: 0;
+        }
+
+        .media-meta {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .author-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+
+        .author-avatar {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+        }
+
+        .author-name {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--six-eyes);
+        }
+
+        .video-title {
+            font-size: 12.5px;
+            color: #cbd5e1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .dl-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .dl-btn {
+            width: 100%;
+            padding: 13px;
+            border-radius: 11px;
+            border: none;
+            font-weight: 700;
+            font-size: 13.5px;
+            cursor: pointer;
+        }
+
+        .dl-hd {
+            background: linear-gradient(90deg, #00f2fe, #0284c7);
+            color: #03050a;
+        }
+
+        .dl-sd {
+            background: rgba(147, 51, 234, 0.25);
+            color: #e9d5ff;
+            border: 1px solid rgba(147, 51, 234, 0.5);
+        }
+
+        .dl-mp3 {
+            background: rgba(255, 23, 68, 0.2);
+            color: #ff8a80;
+            border: 1px solid rgba(255, 23, 68, 0.45);
+        }
+
+        .footer-quote {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 11.5px;
+            color: #94a3b8;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursed-orb orb-blue"></div>
+    <div class="cursed-orb orb-purple"></div>
+
+    <!-- Audio Musik Latar -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.myinstants.com/media/sounds/gojo-edit-audio.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <!-- Lingkaran Animasi Gojo Melompat -->
+        <div class="gojo-animation-box">
+            <div class="aura-ring"></div>
+            <svg class="gojo-character-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="60" cy="58" r="42" fill="rgba(0, 242, 254, 0.15)"/>
+                <path d="M35 115 C35 88, 85 88, 85 115 Z" fill="#0f172a" stroke="#1e293b" stroke-width="2"/>
+                <rect x="46" y="78" width="28" height="14" rx="4" fill="#090d16"/>
+                <circle cx="60" cy="85" r="2.2" fill="#fbbf24"/>
+                <circle cx="28" cy="92" r="7" fill="#fde6d8"/>
+                <circle cx="92" cy="82" r="7" fill="#fde6d8"/>
+                <circle cx="92" cy="68" r="9" fill="#a855f7">
+                    <animate attributeName="r" values="7;11;7" dur="0.8s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="92" cy="68" r="4" fill="#ffffff"/>
+                <path d="M38 48 C38 72, 82 72, 82 48 C82 32, 38 32, 38 48 Z" fill="#fde6d8"/>
+                <rect x="36" y="44" width="48" height="13" rx="3" fill="#05070c"/>
+                <circle cx="49" cy="50.5" r="2.5" fill="#00f2fe">
+                    <animate attributeName="opacity" values="0.4;1;0.4" dur="1.2s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="71" cy="50.5" r="2.5" fill="#00f2fe">
+                    <animate attributeName="opacity" values="0.4;1;0.4" dur="1.2s" repeatCount="indefinite"/>
+                </circle>
+                <path d="M53 64 Q60 69 67 64" stroke="#b45309" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                <path d="M34 46 L25 32 L39 36 L34 18 L48 28 L55 10 L63 27 L74 12 L75 29 L90 20 L82 37 L96 34 L85 47 Z" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+            </svg>
+        </div>
+
+        <div class="header-title">
+            <h1>TIKTOK DOWNLOADER</h1>
+            <p>JANGAN LUPA FOLLOW TIKTOK @1NONLY TRAA</p>
+        </div>
+
+        <!-- Kotak Input + Tombol Paste -->
+        <div class="input-wrapper">
+            <input type="text" id="urlInput" placeholder="Tempel tautan video TikTok di sini..." autocomplete="off">
+            <button type="button" class="btn-paste" onclick="pasteFromClipboard()">
+                📋 Paste
+            </button>
+        </div>
+
+        <button type="button" class="btn-exec" id="fetchBtn" onclick="fetchTikTokData()">
+            ⚡ Download Video
+        </button>
+
+        <div id="statusBox" class="status-box"></div>
+
+        <!-- Kartu Hasil Video -->
+        <div id="resultCard" class="result-card">
+            <div class="media-preview">
+                <img id="videoThumb" class="thumb-img" src="" alt="Thumbnail">
+                <div class="media-meta">
+                    <div class="author-badge">
+                        <img id="authorAvatar" class="author-avatar" src="" alt="Avatar">
+                        <span id="authorName" class="author-name">@username</span>
+                    </div>
+                    <p id="videoTitle" class="video-title">Deskripsi video...</p>
+                </div>
+            </div>
+
+            <div class="dl-grid">
+                <button type="button" id="btnDownloadHD" class="dl-btn dl-hd">
+                    📥 Download MP4 (No Watermark)
+                </button>
+                <button type="button" id="btnDownloadWM" class="dl-btn dl-sd">
+                    🎬 Download MP4 (Original / Watermark)
+                </button>
+                <button type="button" id="btnDownloadMP3" class="dl-btn dl-mp3">
+                    🎵 Download Audio (MP3)
+                </button>
+            </div>
+        </div>
+
+        <div class="footer-quote">
+            "Bahkan di tengah luasnya langit dan bumi, kebebasan unduhan ini sepenuhnya berada di dalam genggamanku!"
+        </div>
+    </div>
+
+    <script>
+        const urlInput = document.getElementById('urlInput');
+        const statusBox = document.getElementById('statusBox');
+        const resultCard = document.getElementById('resultCard');
+        const fetchBtn = document.getElementById('fetchBtn');
+        const bgMusic = document.getElementById('bgMusic');
+
+        let isMusicPlaying = false;
+
+        // Fungsi pemicu audio otomatis saat sentuhan/klik pertama pengguna di layar
+        function startMusicOnInteraction() {
+            if (!isMusicPlaying) {
+                bgMusic.volume = 1.0;
+                bgMusic.play().then(() => {
+                    isMusicPlaying = true;
+                }).catch(() => {});
+            }
+        }
+
+        // Daftarkan listener interaksi pertama agar musik langsung menyala mulus
+        window.addEventListener('click', startMusicOnInteraction, { once: true });
+        window.addEventListener('touchstart', startMusicOnInteraction, { once: true });
+        window.addEventListener('keydown', startMusicOnInteraction, { once: true });
+
+        // Coba langsung mainkan saat load (jika diizinkan browser)
+        window.addEventListener('DOMContentLoaded', () => {
+            bgMusic.volume = 1.0;
+            bgMusic.play().then(() => {
+                isMusicPlaying = true;
+            }).catch(() => {});
+        });
+
+        // Otomatis matikan musik saat pengguna keluar web / minimize / ganti tab
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                bgMusic.pause();
+            } else if (isMusicPlaying) {
+                bgMusic.play().catch(() => {});
+            }
+        });
+
+        // Tombol Paste Otomatis dari Clipboard
+        async function pasteFromClipboard() {
+            startMusicOnInteraction();
+            try {
+                const text = await navigator.clipboard.readText();
+                if (text) {
+                    urlInput.value = text.trim();
+                    showStatus('Tautan berhasil ditempel!', 'status-success');
+                } else {
+                    showStatus('Clipboard kosong.', 'status-error');
+                }
+            } catch (err) {
+                urlInput.focus();
+                showStatus('Tempel manual di kolom input.', 'status-error');
+            }
+        }
+
+        function showStatus(message, className) {
+            statusBox.textContent = message;
+            statusBox.className = 'status-box ' + className;
+        }
+
+        // Ambil Data dari API TikWM
+        async function fetchTikTokData() {
+            startMusicOnInteraction();
+            const tiktokUrl = urlInput.value.trim();
+            resultCard.style.display = 'none';
+
+            if (!tiktokUrl) {
+                showStatus('Masukkan atau Paste tautan TikTok terlebih dahulu!', 'status-error');
+                return;
+            }
+
+            if (!tiktokUrl.includes('tiktok.com')) {
+                showStatus('Tautan tidak valid! Pastikan link berasal dari TikTok.', 'status-error');
+                return;
+            }
+
+            fetchBtn.disabled = true;
+            fetchBtn.textContent = 'MENDOWNLOAD - BTW JANGAN LUPA FOLLOW TT 1nonlytraa...';
+            showStatus('Sedang mengekstrak video dari server...', 'status-loading');
+
+            try {
+                const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(tiktokUrl)}`;
+                const response = await fetch(apiUrl);
+                const result = await response.json();
+
+                if (result.code === 0 && result.data) {
+                    const data = result.data;
+
+                    document.getElementById('videoThumb').src = data.cover;
+                    document.getElementById('authorAvatar').src = data.author.avatar;
+                    document.getElementById('authorName').textContent = `@${data.author.unique_id}`;
+                    document.getElementById('videoTitle').textContent = data.title || 'Video TikTok';
+
+                    const safeFilename = `TikTokDown_${data.author.unique_id}_${data.id}`;
+
+                    document.getElementById('btnDownloadHD').onclick = () => {
+                        triggerDirectDownload(data.play, `${safeFilename}_NoWM.mp4`, 'btnDownloadHD');
+                    };
+
+                    document.getElementById('btnDownloadWM').onclick = () => {
+                        triggerDirectDownload(data.wmplay, `${safeFilename}_WM.mp4`, 'btnDownloadWM');
+                    };
+
+                    document.getElementById('btnDownloadMP3').onclick = () => {
+                        triggerDirectDownload(data.music, `${safeFilename}_Audio.mp3`, 'btnDownloadMP3');
+                    };
+
+                    showStatus('', '');
+                    resultCard.style.display = 'block';
+                } else {
+                    showStatus('Gagal mengambil video. Pastikan video tidak di-private.', 'status-error');
+                }
+            } catch (error) {
+                showStatus('Gagal terhubung ke server API. Periksa koneksi internet.', 'status-error');
+            } finally {
+                fetchBtn.disabled = false;
+                fetchBtn.textContent = '⚡ Eksekusi Unduhan';
+            }
+        }
+
+        // Force Download Langsung ke Perangkat
+        async function triggerDirectDownload(fileUrl, filename, btnId) {
+            const btn = document.getElementById(btnId);
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '⏳ Mengunduh...';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch(fileUrl);
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
+
+                const tempLink = document.createElement('a');
+                tempLink.href = blobUrl;
+                tempLink.download = filename;
+                document.body.appendChild(tempLink);
+                tempLink.click();
+                document.body.removeChild(tempLink);
+
+                window.URL.revokeObjectURL(blobUrl);
+                showStatus(`Berhasil mengunduh: ${filename}`, 'status-success');
+            } catch (err) {
+                window.open(fileUrl, '_blank');
+                showStatus('Membuka media untuk disimpan...', 'status-success');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        urlInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                fetchTikTokData();
+            }
+        });
+    </script>
+
+</body>
+</html>
